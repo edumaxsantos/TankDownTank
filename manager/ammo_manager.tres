@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://31ljubuahww4"]
+
+[sub_resource type="GDScript" id="GDScript_00tew"]
+script/source = "extends Resource
+
+@export var total_ammo: int
+"
+
+[resource]
+script = SubResource("GDScript_00tew")
+total_ammo = 0

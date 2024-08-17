@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://s1g8onqfpoms"]
+
+[ext_resource type="SpriteFrames" uid="uid://oj3uo8ii5x1p" path="res://entities/bullet/explosion/explosion.tres" id="1_86j2i"]
+
+[node name="Explosion" type="AnimatedSprite2D"]
+sprite_frames = ExtResource("1_86j2i")
+frame = 2
+frame_progress = 1.0

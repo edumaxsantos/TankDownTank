@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://wjkhhwy75evy"]
+
+[ext_resource type="Script" path="res://entities/bullet/bullet.gd" id="1_pik6l"]
+[ext_resource type="Texture2D" uid="uid://c036bp5hrcw8o" path="res://assets/bulletGreenSilver_outline.png" id="2_44phx"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oohic"]
+height = 34.0
+
+[node name="Bullet" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 6
+script = ExtResource("1_pik6l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_44phx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_oohic")

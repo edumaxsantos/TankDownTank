@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=3 uid="uid://tmej3x0uu1pa"]
+
+[ext_resource type="Script" path="res://game.gd" id="1_774ky"]
+[ext_resource type="PackedScene" uid="uid://wbq26hufp6a4" path="res://node.tscn" id="1_ls12w"]
+[ext_resource type="PackedScene" uid="uid://c6175jdmke3uy" path="res://entities/cannon.tscn" id="2_eddwu"]
+[ext_resource type="PackedScene" uid="uid://8ylyvbavcb4k" path="res://manager/ammo_manager.tscn" id="6_6idj8"]
+[ext_resource type="PackedScene" uid="uid://cf5ahcwt366vr" path="res://entities/obstacle/barrel_green_side.tscn" id="6_qvbww"]
+[ext_resource type="PackedScene" uid="uid://qi06xd76h6b6" path="res://entities/enemy_cannon.tscn" id="7_nrsfh"]
+[ext_resource type="PackedScene" uid="uid://bdv8wbyrc6ftu" path="res://layout/ammo.tscn" id="8_584ls"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_774ky")
+
+[node name="Map" parent="." instance=ExtResource("1_ls12w")]
+
+[node name="Cannon" parent="." node_paths=PackedStringArray("_ammo_manager") instance=ExtResource("2_eddwu")]
+top_level = true
+position = Vector2(91, 79)
+_ammo_manager = NodePath("../AmmoManager")
+initial_health = 100.0
+
+[node name="BarrelGreenSide" parent="." instance=ExtResource("6_qvbww")]
+top_level = true
+position = Vector2(632, 114)
+
+[node name="EnemyCannon" parent="." instance=ExtResource("7_nrsfh")]
+visible = false
+top_level = true
+position = Vector2(684, 420)
+
+[node name="AmmoManager" parent="." node_paths=PackedStringArray("ammo_layout") instance=ExtResource("6_6idj8")]
+total_ammo = 30
+ammo_layout = NodePath("../CanvasLayer/Ammo")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Ammo" parent="CanvasLayer" instance=ExtResource("8_584ls")]
