@@ -15,11 +15,15 @@ offset_right = 216.0
 offset_bottom = 27.0
 theme_override_styles/background = SubResource("StyleBoxFlat_r1cno")
 theme_override_styles/fill = SubResource("StyleBoxFlat_7pm3i")
-value = 16.58
 show_percentage = false
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
 
+[node name="BlinkTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="BlinkTimer" to="." method="_on_blink_timer_timeout"]

@@ -1,23 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://cf5ahcwt366vr"]
+[gd_scene load_steps=6 format=3 uid="uid://cf5ahcwt366vr"]
 
 [ext_resource type="Texture2D" uid="uid://bitkr8lmax08w" path="res://assets/obstacles/barrelGreen_side.png" id="1_0qo3s"]
 [ext_resource type="Script" path="res://entities/obstacle/obstacle.gd" id="1_jmsb3"]
 [ext_resource type="PackedScene" uid="uid://k3413tqf2yid" path="res://health.tscn" id="1_qkyke"]
+[ext_resource type="Material" uid="uid://b6yu3gc1gkoq0" path="res://entities/damage_shader.tres" id="1_s31u8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d2b8p"]
 size = Vector2(44, 61)
 
 [node name="BarrelGreenSide" type="StaticBody2D" groups=["obstacles"]]
+material = ExtResource("1_s31u8")
 collision_layer = 4
 collision_mask = 15
 script = ExtResource("1_jmsb3")
 
-[node name="Health" parent="." instance=ExtResource("1_qkyke")]
+[node name="Health" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("1_qkyke")]
 position = Vector2(-38, -59)
 scale = Vector2(0.4, 0.72)
 max_health = 150.0
+target_node = NodePath("..")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+use_parent_material = true
 texture = ExtResource("1_0qo3s")
 
 [node name="NormalCollision" type="CollisionShape2D" parent="."]

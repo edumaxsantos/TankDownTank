@@ -1,12 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://tmej3x0uu1pa"]
+[gd_scene load_steps=10 format=3 uid="uid://tmej3x0uu1pa"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_774ky"]
 [ext_resource type="PackedScene" uid="uid://wbq26hufp6a4" path="res://node.tscn" id="1_ls12w"]
 [ext_resource type="PackedScene" uid="uid://c6175jdmke3uy" path="res://entities/cannon.tscn" id="2_eddwu"]
+[ext_resource type="Shader" path="res://entities/cannon.gdshader" id="5_mp0on"]
 [ext_resource type="PackedScene" uid="uid://8ylyvbavcb4k" path="res://manager/ammo_manager.tscn" id="6_6idj8"]
 [ext_resource type="PackedScene" uid="uid://cf5ahcwt366vr" path="res://entities/obstacle/barrel_green_side.tscn" id="6_qvbww"]
 [ext_resource type="PackedScene" uid="uid://qi06xd76h6b6" path="res://entities/enemy_cannon.tscn" id="7_nrsfh"]
 [ext_resource type="PackedScene" uid="uid://bdv8wbyrc6ftu" path="res://layout/ammo.tscn" id="8_584ls"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5sown"]
+resource_local_to_scene = true
+shader = ExtResource("5_mp0on")
+shader_parameter/apply_white = false
+shader_parameter/whiteness_amount = 0.5
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_774ky")
@@ -20,6 +27,7 @@ _ammo_manager = NodePath("../AmmoManager")
 
 [node name="BarrelGreenSide" parent="." instance=ExtResource("6_qvbww")]
 top_level = true
+material = SubResource("ShaderMaterial_5sown")
 position = Vector2(632, 114)
 
 [node name="EnemyCannon" parent="." instance=ExtResource("7_nrsfh")]

@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b6yu3gc1gkoq0"]
+
+[ext_resource type="Shader" path="res://entities/cannon.gdshader" id="1_mm6xn"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_mm6xn")
+shader_parameter/apply_white = false
+shader_parameter/whiteness_amount = 0.5

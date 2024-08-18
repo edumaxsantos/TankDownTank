@@ -5,9 +5,9 @@ class_name Cannon
 @export var _ammo_manager: AmmoManager
 @export var health: Health
 
-@onready var _base: Sprite2D = $Base
-@onready var _barrel: Sprite2D = $Barrel
-@onready var _bullet_spawn_point: Node2D = $Barrel/BulletSpawnPoint
+@onready var _base: Sprite2D = %Base
+@onready var _barrel: Sprite2D = %Barrel
+@onready var _bullet_spawn_point: Node2D = %Barrel/BulletSpawnPoint
 @onready var _collision: CollisionShape2D = $CollisionShape2D
 	
 func _physics_process(delta: float) -> void:
@@ -17,11 +17,8 @@ func _physics_process(delta: float) -> void:
 	_handle_left_click()
 	
 func take_damage(damage: float) -> void:
-	print("taking damage.")
-	print(damage)
-	print("current health: " + str(health.current_health))
 	health.take_damage(damage)
-	print("current health: " + str(health.current_health))
+	
 	
 func _handle_rotation(delta: float) -> void:
 	var initial_rotation: float = 0

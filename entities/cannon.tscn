@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c6175jdmke3uy"]
+[gd_scene load_steps=7 format=3 uid="uid://c6175jdmke3uy"]
 
 [ext_resource type="Texture2D" uid="uid://c5cjx4xgaf411" path="res://assets/tankGreen.png" id="1_takvd"]
 [ext_resource type="Script" path="res://cannon.gd" id="1_v6v4b"]
 [ext_resource type="Texture2D" uid="uid://r2jodvk8er7b" path="res://assets/barrelGreen.png" id="2_6a8mt"]
+[ext_resource type="Material" uid="uid://b6yu3gc1gkoq0" path="res://entities/damage_shader.tres" id="3_bx8wp"]
 [ext_resource type="PackedScene" uid="uid://k3413tqf2yid" path="res://health.tscn" id="4_ndriy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i0lw2"]
@@ -13,24 +14,32 @@ collision_mask = 15
 script = ExtResource("1_v6v4b")
 health = NodePath("Health")
 
-[node name="Base" type="Sprite2D" parent="."]
+[node name="Health" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("4_ndriy")]
+position = Vector2(-55, -75)
+scale = Vector2(0.5, 0.5)
+max_health = 100.0
+target_node = NodePath("../Body")
+
+[node name="Body" type="Node2D" parent="."]
+material = ExtResource("3_bx8wp")
+
+[node name="Base" type="Sprite2D" parent="Body"]
+unique_name_in_owner = true
+use_parent_material = true
 texture = ExtResource("1_takvd")
 metadata/_edit_group_ = true
 
-[node name="Barrel" type="Sprite2D" parent="."]
+[node name="Barrel" type="Sprite2D" parent="Body"]
+unique_name_in_owner = true
+use_parent_material = true
 position = Vector2(0, 2)
 texture = ExtResource("2_6a8mt")
 centered = false
 offset = Vector2(-8, -50)
 metadata/_edit_group_ = true
 
-[node name="BulletSpawnPoint" type="Node2D" parent="Barrel"]
+[node name="BulletSpawnPoint" type="Node2D" parent="Body/Barrel"]
 position = Vector2(0, -50)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_i0lw2")
-
-[node name="Health" parent="." instance=ExtResource("4_ndriy")]
-position = Vector2(-55, -75)
-scale = Vector2(0.5, 0.5)
-max_health = 100.0
