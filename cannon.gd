@@ -3,21 +3,25 @@ class_name Cannon
 
 @export var speed: float = 200
 @export var _ammo_manager: AmmoManager
-@export var initial_health: float
+@export var health: Health
 
-@onready var _health: Health = $Health
 @onready var _base: Sprite2D = $Base
 @onready var _barrel: Sprite2D = $Barrel
 @onready var _bullet_spawn_point: Node2D = $Barrel/BulletSpawnPoint
-
-func _ready() -> void:
-	_health.max_health = initial_health
+@onready var _collision: CollisionShape2D = $CollisionShape2D
 	
 func _physics_process(delta: float) -> void:
 	_handle_movement(delta)
 	_handle_rotation(delta)
 	_handle_mouse_rotation()
 	_handle_left_click()
+	
+func take_damage(damage: float) -> void:
+	print("taking damage.")
+	print(damage)
+	print("current health: " + str(health.current_health))
+	health.take_damage(damage)
+	print("current health: " + str(health.current_health))
 	
 func _handle_rotation(delta: float) -> void:
 	var initial_rotation: float = 0
@@ -27,8 +31,12 @@ func _handle_rotation(delta: float) -> void:
 		
 	if Input.is_action_pressed("right"):
 		initial_rotation = 10
+		
+	var rotation_val = deg_to_rad(2 * initial_rotation * delta)
 	
-	_base.rotate(deg_to_rad(2 * initial_rotation * delta))
+	_base.rotate(rotation_val)
+	_collision.rotate(rotation_val)
+	
 
 
 func _handle_movement(delta: float) -> void:
@@ -70,6 +78,8 @@ func _handle_bullet() -> void:
 	if  not _ammo_manager.can_shoot(): return
 	
 	var mouse_position = get_viewport().get_mouse_position()
-	var bullet: Bullet = Bullet.create_bullet(_bullet_spawn_point.global_position, mouse_position)
+	var direction = (mouse_position - _barrel.global_position).normalized()
+	
+	var bullet: Bullet = Bullet.create_bullet(_bullet_spawn_point.global_position, direction)
 	get_parent().add_child(bullet)
 	_ammo_manager.decrease_ammo()

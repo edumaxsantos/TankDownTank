@@ -20,6 +20,6 @@ max_health = 150.0
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_0qo3s")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="NormalCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_d2b8p")

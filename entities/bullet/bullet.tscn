@@ -6,13 +6,16 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oohic"]
 height = 34.0
 
-[node name="Bullet" type="CharacterBody2D"]
+[node name="Bullet" type="Area2D" groups=["projectiles"]]
 collision_layer = 8
-collision_mask = 6
+collision_mask = 14
 script = ExtResource("1_pik6l")
+damage = 50.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_44phx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_oohic")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

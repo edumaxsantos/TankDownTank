@@ -1,0 +1,21 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://dbmblkuvnu1gj"]
+
+[ext_resource type="Texture2D" uid="uid://doriw4hr0fufx" path="res://assets/obstacles/smokeOrange3.png" id="1_erhtp"]
+[ext_resource type="Texture2D" uid="uid://cuhhwbq7sjkmu" path="res://assets/obstacles/smokeOrange1.png" id="2_p4s1w"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_erhtp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_p4s1w")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 4.0
+}]

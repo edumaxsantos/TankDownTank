@@ -1,17 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://c6175jdmke3uy"]
+[gd_scene load_steps=6 format=3 uid="uid://c6175jdmke3uy"]
 
 [ext_resource type="Texture2D" uid="uid://c5cjx4xgaf411" path="res://assets/tankGreen.png" id="1_takvd"]
 [ext_resource type="Script" path="res://cannon.gd" id="1_v6v4b"]
 [ext_resource type="Texture2D" uid="uid://r2jodvk8er7b" path="res://assets/barrelGreen.png" id="2_6a8mt"]
 [ext_resource type="PackedScene" uid="uid://k3413tqf2yid" path="res://health.tscn" id="4_ndriy"]
-[ext_resource type="PackedScene" uid="uid://8ylyvbavcb4k" path="res://manager/ammo_manager.tscn" id="5_o7s2s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i0lw2"]
-size = Vector2(80, 88)
+size = Vector2(74, 70)
 
-[node name="Cannon" type="CharacterBody2D"]
+[node name="Cannon" type="CharacterBody2D" node_paths=PackedStringArray("health") groups=["cannon"]]
 collision_mask = 15
 script = ExtResource("1_v6v4b")
+health = NodePath("Health")
 
 [node name="Base" type="Sprite2D" parent="."]
 texture = ExtResource("1_takvd")
@@ -25,15 +25,12 @@ offset = Vector2(-8, -50)
 metadata/_edit_group_ = true
 
 [node name="BulletSpawnPoint" type="Node2D" parent="Barrel"]
-position = Vector2(0, -69)
+position = Vector2(0, -50)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_i0lw2")
 
 [node name="Health" parent="." instance=ExtResource("4_ndriy")]
 position = Vector2(-55, -75)
 scale = Vector2(0.5, 0.5)
-
-[node name="AmmoManager" parent="." instance=ExtResource("5_o7s2s")]
-total_ammo = 30
+max_health = 100.0

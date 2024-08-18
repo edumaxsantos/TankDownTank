@@ -17,7 +17,6 @@ script = ExtResource("1_774ky")
 top_level = true
 position = Vector2(91, 79)
 _ammo_manager = NodePath("../AmmoManager")
-initial_health = 100.0
 
 [node name="BarrelGreenSide" parent="." instance=ExtResource("6_qvbww")]
 top_level = true
@@ -28,10 +27,12 @@ visible = false
 top_level = true
 position = Vector2(684, 420)
 
-[node name="AmmoManager" parent="." node_paths=PackedStringArray("ammo_layout") instance=ExtResource("6_6idj8")]
+[node name="AmmoManager" parent="." instance=ExtResource("6_6idj8")]
 total_ammo = 30
-ammo_layout = NodePath("../CanvasLayer/Ammo")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Ammo" parent="CanvasLayer" instance=ExtResource("8_584ls")]
+[node name="Ammo" parent="CanvasLayer" node_paths=PackedStringArray("ammo_manager") instance=ExtResource("8_584ls")]
+ammo_manager = NodePath("../../AmmoManager")
+
+[connection signal="ammo_changed" from="AmmoManager" to="AmmoManager" method="_on_ammo_changed"]
