@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqb8evqdcpwwj"]
+
+[ext_resource type="Texture2D" uid="uid://coobx66lc4ma2" path="res://assets/obstacles/sandbagBrown.png" id="1_koe3w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e0ipm"]
+size = Vector2(64, 44)
+
+[node name="Wall" type="StaticBody2D" groups=["barrier"]]
+collision_layer = 16
+collision_mask = 11
+
+[node name="SandbagBrown" type="Sprite2D" parent="."]
+texture = ExtResource("1_koe3w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["barrier"]]
+shape = SubResource("RectangleShape2D_e0ipm")
