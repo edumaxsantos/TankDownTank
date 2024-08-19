@@ -1,25 +1,22 @@
 extends Area2D
+## Basic class for bullet. Defines the general
+## properties and methods for all bullets
 class_name Bullet
+
 
 @export var speed: float = 400
 @export var damage: float
+@export var spawn_position: Vector2
+@export var direction: Vector2
 
-var _direction: Vector2
+func _ready() -> void:
+	top_level = true
+	global_position = spawn_position
+	rotation = direction.angle() + deg_to_rad(90)
 
-static func create_bullet(spawn_position: Vector2, direction: Vector2) -> Bullet:
-	var bullet_scene: PackedScene = load("res://entities/bullet/bullet.tscn")
-	var bullet: Bullet = bullet_scene.instantiate()
-	bullet.top_level = true
-	bullet.global_position = spawn_position
-	
-	bullet._direction = direction
-	
-	bullet.rotation = direction.angle() + deg_to_rad(90)
-	
-	return bullet
 	
 func _physics_process(delta: float) -> void:
-	var velocity = _direction * speed
+	var velocity = direction * speed
 	
 	translate(velocity * delta)
 
