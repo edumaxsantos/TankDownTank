@@ -77,6 +77,9 @@ func _handle_bullet() -> void:
 	var mouse_position = get_viewport().get_mouse_position()
 	var direction = (mouse_position - _barrel.global_position).normalized()
 	
-	var bullet: Bullet = Bullet.create_bullet(_bullet_spawn_point.global_position, direction)
+	
+	var bullet: Bullet = load("res://entities/bullet/normal_bullet.tscn").instantiate()
+	bullet.direction = direction
+	bullet.spawn_position = _bullet_spawn_point.global_position
 	get_parent().add_child(bullet)
 	_ammo_manager.decrease_ammo()
