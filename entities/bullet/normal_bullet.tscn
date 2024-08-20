@@ -5,6 +5,7 @@
 
 [node name="NormalBullet" instance=ExtResource("1_cgin3")]
 damage = 75.0
+reload_rate = 1.0
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_howq7")

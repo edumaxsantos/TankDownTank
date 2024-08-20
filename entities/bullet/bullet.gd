@@ -6,13 +6,24 @@ class_name Bullet
 
 @export var speed: float = 400
 @export var damage: float
-@export var spawn_position: Vector2
-@export var direction: Vector2
+## how fast it is to reload and be allowed to shoot again.
+## the lower the number, the faster you can shoot.
+## Measured in seconds.
+@export var reload_rate: float
+@export var display_smoke: bool = true
+
+
+@onready var spawn_position: Vector2
+@onready var direction: Vector2
+@onready var sprite: Sprite2D = $Sprite2D
 
 func _ready() -> void:
 	top_level = true
 	global_position = spawn_position
 	rotation = direction.angle() + deg_to_rad(90)
+	
+	if sprite == null:
+		push_error("missing sprite")
 
 	
 func _physics_process(delta: float) -> void:
