@@ -13,12 +13,14 @@ class_name Cannon
 @onready var _bullet_spawn_point: Node2D = %Barrel/BulletSpawnPoint
 @onready var _collision: CollisionShape2D = $CollisionShape2D
 @onready var _fire_timer: Timer = $FireTimer
+@onready var _track_scene: PackedScene = load("res://entities/track.tscn")
 
 var _bullet: Bullet
 var _can_fire: bool
+var _velocity: Vector2
 
 func _ready() -> void:
-	_can_fire = false
+	_can_fire = true
 	_ammo_manager.add_ammo(AmmoManager.Ammo.Normal, 30)
 	_ammo_manager.add_ammo(AmmoManager.Ammo.Fast, 200)
 	_ammo_manager.selected_ammo = bullet_type
@@ -52,12 +54,16 @@ func _handle_rotation(delta: float) -> void:
 
 func _handle_movement(delta: float) -> void:
 	var direction = Vector2(sin(_base.rotation), -cos(_base.rotation))
-	
+	_velocity = Vector2.ZERO
+
 	if Input.is_action_pressed("forward"):
-		position += direction * speed * delta
+		_velocity += direction * speed * delta
 		
 	if Input.is_action_pressed("backward"):
-		position -= direction * speed * delta
+		_velocity -= direction * speed * delta
+	
+	position += _velocity
+		
 	move_and_slide()
 
 func _handle_mouse_rotation() -> void:
@@ -73,6 +79,8 @@ func _handle_right_click() -> void:
 	_ammo_manager.change_selected_ammo()
 		
 	_bullet = _ammo_manager.get_bullet_instance()
+	if _fire_timer.is_stopped():
+		_fire_timer.wait_time = _bullet.reload_rate
 	
 	
 func _handle_left_click() -> void:
@@ -80,8 +88,6 @@ func _handle_left_click() -> void:
 		return
 		
 	if not _can_fire: return
-	
-	_can_fire = false
 	
 	_handle_explosion()
 	_handle_bullet()
@@ -113,7 +119,22 @@ func _handle_bullet() -> void:
 	bullet.spawn_position = _bullet_spawn_point.global_position
 	get_parent().add_child(bullet)
 	_ammo_manager.decrease_ammo()
+	_can_fire = false
+	_fire_timer.start()
+	
+func _handle_track() -> void:
+	var track: Track = _track_scene.instantiate()
+	track.global_position = _collision.global_position
+	track.rotation = _collision.rotation
+	track.top_level = true
+	track.z_index = 1
+	get_parent().add_child(track)
 
 func _on_fire_timer_timeout() -> void:
 	_can_fire = true
 	_fire_timer.wait_time = _bullet.reload_rate
+
+
+func _on_track_timer_timeout() -> void:
+	if _velocity != Vector2.ZERO:
+		_handle_track()

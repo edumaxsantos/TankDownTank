@@ -45,6 +45,11 @@ position = Vector2(0, -50)
 shape = SubResource("RectangleShape2D_i0lw2")
 
 [node name="FireTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="TrackTimer" type="Timer" parent="."]
+wait_time = 0.5
 autostart = true
 
 [connection signal="timeout" from="FireTimer" to="." method="_on_fire_timer_timeout"]
+[connection signal="timeout" from="TrackTimer" to="." method="_on_track_timer_timeout"]

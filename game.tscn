@@ -21,17 +21,17 @@ script = ExtResource("1_774ky")
 [node name="Map" parent="." instance=ExtResource("1_ls12w")]
 
 [node name="Cannon" parent="." node_paths=PackedStringArray("_ammo_manager") instance=ExtResource("2_eddwu")]
-top_level = true
+z_index = 5
 position = Vector2(91, 79)
 _ammo_manager = NodePath("../AmmoManager")
 
 [node name="BarrelGreenSide" parent="." instance=ExtResource("6_qvbww")]
-top_level = true
+z_index = 1
 material = SubResource("ShaderMaterial_5sown")
 position = Vector2(632, 114)
 
 [node name="EnemyCannon" parent="." instance=ExtResource("7_nrsfh")]
-top_level = true
+z_index = 1
 position = Vector2(684, 420)
 
 [node name="AmmoManager" parent="." instance=ExtResource("6_6idj8")]
@@ -39,4 +39,5 @@ position = Vector2(684, 420)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Ammo" parent="CanvasLayer" node_paths=PackedStringArray("ammo_manager") instance=ExtResource("8_584ls")]
+z_index = 10
 ammo_manager = NodePath("../../AmmoManager")
