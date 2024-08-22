@@ -46,6 +46,7 @@ shape = SubResource("RectangleShape2D_i0lw2")
 
 [node name="FireTimer" type="Timer" parent="."]
 one_shot = true
+autostart = true
 
 [node name="TrackTimer" type="Timer" parent="."]
 wait_time = 0.5

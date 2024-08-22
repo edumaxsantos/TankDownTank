@@ -12,11 +12,12 @@ enum Ammo {
 		return selected_ammo
 	set(value):
 		selected_ammo = value
-		ammo_changed.emit(ammo_instances[value].instantiate().get_node("Sprite2D"), _get_selected_quantity())
+		var bullet: Bullet = get_bullet_instance()
+		ammo_changed.emit(bullet.get_node("Sprite2D"), _get_selected_quantity())
 		
 		
-var _ammo = {}
-var ammo_instances = {
+var _ammo: Dictionary = {}
+var ammo_instances: Dictionary = {
 	Ammo.Normal: preload("res://entities/bullet/normal_bullet.tscn"),
 	Ammo.Fast: preload("res://entities/bullet/fast_bullet.tscn")
 }
@@ -43,7 +44,7 @@ func can_shoot() -> bool:
 	return _get_selected_quantity() > 0
 
 func decrease_ammo() -> void:
-	var instance = get_bullet_instance()
+	var instance: Bullet = get_bullet_instance()
 	ammo_changed.emit(instance.get_node("Sprite2D"), _get_selected_quantity() - 1)
 	
 func change_selected_ammo() -> void:

@@ -16,7 +16,9 @@ func take_damage(damage: float) -> void:
 func _handle_explosion() -> void:
 	if not health.is_dead(): return
 	
-	var explosion: Explosion = load("res://entities/obstacle/explosion.tscn").instantiate()
+	var explosion_scene: PackedScene = load("res://entities/obstacle/explosion.tscn")
+	
+	var explosion: Explosion = explosion_scene.instantiate()
 	
 	explosion.global_position = global_position
 	explosion.top_level = true

@@ -9,6 +9,10 @@ height = 34.0
 collision_layer = 8
 collision_mask = 30
 script = ExtResource("1_pik6l")
+speed = null
+damage = null
+reload_rate = null
+display_smoke = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
